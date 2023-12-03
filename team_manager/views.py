@@ -18,6 +18,13 @@ class TeamMemberCreateView(CreateView):
     template_name = 'form.html'
     success_url = '/'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title_message'] = "Add a team member"
+        context['sub_message'] = "Set email, location and role."
+        context['view_type'] = "Add"
+        return context
+
 
 class TeamMemberUpdateView(UpdateView):
     model = TeamMember
@@ -27,7 +34,9 @@ class TeamMemberUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['view_type'] = "edit"
+        context['title_message'] = "Edit team member"
+        context['sub_message'] = "Edit contact info, location and role."
+        context['view_type'] = "Edit"
         return context
 
 

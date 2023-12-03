@@ -1,13 +1,22 @@
-<h1>{% block title %}{% endblock %}</h1>
+{% extends "base.html" %} 
 
-<form method="post" action="">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Save</button>
-</form>
+{% block title %} {{ view_type }}{% endblock %} 
 
-{% if view_type == "edit" %}
-<form method="POST" action="{% url 'delete' slug=object.slug %}">
-  {% csrf_token %}
-  <button type="submit">Delete</button>
-</form>
-{% endif %}
+{% block content %}
+  <div class="container mt-5">
+    <h1>{{ title_message }}</h1>
+    <p class="text-muted">{{ sub_message }}</p>
+
+    <form method="post" action="" class="mt-4">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit" class="btn btn-primary float-right">Save</button>
+    </form>
+
+    {% if view_type == "Edit" %}
+    <form method="POST" action="{% url 'delete' slug=object.slug %}">
+      {% csrf_token %}
+      <button class="btn btn-danger ms-2" type="submit">Delete</button>
+    </form>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,17 +1,61 @@
-<a href="{% url 'add' %}">+</a>
-<h1>Team Members</h1>
-<p>You have {{ team_members.count }} members.</p>
+{% extends "base.html" %} {% load static %} {% block title %}Home{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <a class="float-right text-large" href="{% url 'add' %}">+</a>
 
-<hr />
-{% for team_member in team_members %}
-<div>
-  <p>{{ team_member.first_name }} {{ team_member.last_name }}</p>
-  <p>{{ team_member.phone_number }}</p>
-  <p>{{ team_member.email }}</p>
+  <h1>Team Members</h1>
+  <p class="text-muted">You have {{ team_members.count }} members.</p>
 
-  <a href="{% url 'edit' slug=team_member.slug %}"
-    >{{ team_member.first_name }} {{ team_member.last_name }}</a
+  <hr />
+  {% for team_member in team_members %}
+  <div
+    class="member-container row mb-3"
+    data-url="{% url 'edit' slug=team_member.slug %}"
   >
+    <div class="col-md-2">
+      <img
+        class="icon"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
+        alt="Default_pfp.png"
+      />
+    </div>
+
+    <div class="col-md-10">
+      <p>{{ team_member.first_name }} {{ team_member.last_name }}</p>
+      <p class="text-muted">{{ team_member.phone_number }}</p>
+      <p class="text-muted">{{ team_member.email }}</p>
+    </div>
+  </div>
+  <hr />
+  {% endfor %}
 </div>
-<hr />
-{% endfor %}
+
+<style>
+  .member-container:hover {
+    cursor: pointer;
+  }
+
+  .text-large {
+    font-size: 30px;
+  }
+
+  .icon {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var divs = document.querySelectorAll(".member-container");
+
+    divs.forEach(function (div) {
+      div.addEventListener("click", function () {
+        var url = this.getAttribute("data-url");
+        window.location.href = url;
+      });
+    });
+  });
+</script>
+{% endblock %}
