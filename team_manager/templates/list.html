@@ -1,0 +1,14 @@
+<a href="{% url 'add' %}">+</a>
+
+<h1>Team Members</h1>
+<p>You have {{ team_members.count }} members.</p>
+
+<hr />
+{% for team_member in team_members %}
+<div>
+  <p>{{ team_member.first_name }} {{ team_member.last_name }}</p>
+  <p>{{ team_member.phone_number }}</p>
+  <p>{{ team_member.email }}</p>
+</div>
+<hr />
+{% endfor %}
