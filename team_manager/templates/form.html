@@ -1,0 +1,13 @@
+<h1>{% block title %}{% endblock %}</h1>
+
+<form method="post" action="">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+
+{% if view_type == "edit" %}
+<form method="POST" action="{% url 'delete' slug=object.slug %}">
+  {% csrf_token %}
+  <button type="submit">Delete</button>
+</form>
+{% endif %}

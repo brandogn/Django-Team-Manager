@@ -9,4 +9,4 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-Run the server with: ```pyhton manage.py runserver```
+Run the server with: ```python manage.py runserver```

@@ -1,5 +1,4 @@
 <a href="{% url 'add' %}">+</a>
-
 <h1>Team Members</h1>
 <p>You have {{ team_members.count }} members.</p>
 
@@ -9,6 +8,10 @@
   <p>{{ team_member.first_name }} {{ team_member.last_name }}</p>
   <p>{{ team_member.phone_number }}</p>
   <p>{{ team_member.email }}</p>
+
+  <a href="{% url 'edit' slug=team_member.slug %}"
+    >{{ team_member.first_name }} {{ team_member.last_name }}</a
+  >
 </div>
 <hr />
 {% endfor %}
